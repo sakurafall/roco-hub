@@ -1,0 +1,20 @@
+{
+  "name": "themeC",
+  "label": "洛克日",
+  "navBg": "#FFFCF3",
+  "navTextStyle": "black",
+  "tokens": {
+    "colorBg": "#FFF8E1",
+    "colorBgElevated": "#FFFFFF",
+    "colorPrimary": "#FFC93C",
+    "colorPrimarySoft": "#FFF1C2",
+    "colorAccent": "#FF7A5A",
+    "colorText": "#2A2A2A",
+    "colorTextSecondary": "#6E6A5C",
+    "colorBorder": "#F2E6BD",
+    "radiusSm": "12rpx",
+    "radiusMd": "20rpx",
+    "radiusLg": "32rpx",
+    "shadowCard": "0 6rpx 18rpx rgba(255, 180, 80, 0.16)"
+  }
+}

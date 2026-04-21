@@ -14,6 +14,7 @@
       <view class="searchbar__icon">🔍</view>
       <input
         v-model="keyword"
+        :focus="autoFocus"
         class="searchbar__input"
         placeholder="搜索名称 / 编号 / 拼音 (dm / dimo)"
         placeholder-class="searchbar__placeholder"
@@ -138,7 +139,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import { onShow } from '@dcloudio/uni-app'
+import { onLoad, onShow } from '@dcloudio/uni-app'
 import { useTheme } from '@/composables/useTheme'
 import { buildCssVarStyle } from '@/theme/engine'
 import { useSpiritList } from '@/composables/useSpiritList'
@@ -170,6 +171,16 @@ const {
 
 const analytics = useAnalytics()
 const sheetVisible = ref(false)
+const autoFocus = ref(false)
+
+onLoad((query?: Record<string, string>) => {
+  if (query?.focus === '1') {
+    // 延迟一帧再触发 focus，确保输入框已挂载（小程序对 :focus 初始值有时不响应）
+    setTimeout(() => {
+      autoFocus.value = true
+    }, 100)
+  }
+})
 
 // 顶部快捷栏：默认仅展示前 5 个属性，剩下全部走"更多"抽屉
 const QUICK_ELEMENT_LIMIT = 5

@@ -3,6 +3,7 @@
     {
       "path": "pages/home/index",
       "style": {
+        "navigationStyle": "custom",
         "navigationBarTitleText": "洛克助手·Malt Games"
       }
     },
@@ -85,13 +86,13 @@
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "洛克助手·Malt Games",
-    "navigationBarBackgroundColor": "#FFFFFF",
-    "backgroundColor": "#F6F8FB"
+    "navigationBarBackgroundColor": "#FFFCF3",
+    "backgroundColor": "#FFF8E1"
   },
   "tabBar": {
-    "color": "#5C6479",
-    "selectedColor": "#2F6BFF",
-    "backgroundColor": "#FFFFFF",
+    "color": "#6E6A5C",
+    "selectedColor": "#FFA62B",
+    "backgroundColor": "#FFFCF3",
     "borderStyle": "white",
     "list": [
       {

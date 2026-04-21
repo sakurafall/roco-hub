@@ -5,8 +5,10 @@ import { applyTheme, listAvailableThemes } from '@/theme/engine'
 
 const STORAGE_KEY = 'ui.themeName'
 
+const THEME_ORDER = ['themeC', 'themeA', 'themeB'] as const
+
 export const useUiStore = defineStore('ui', () => {
-  const themeName = ref<string>(storage.get<string>(STORAGE_KEY, 'themeA') ?? 'themeA')
+  const themeName = ref<string>(storage.get<string>(STORAGE_KEY, 'themeC') ?? 'themeC')
 
   function setTheme(name: string) {
     themeName.value = name
@@ -15,10 +17,11 @@ export const useUiStore = defineStore('ui', () => {
   }
 
   /**
-   * 在两套首发主题之间切换；后续接入更多主题时可改为按列表轮转。
+   * 在三套首发主题之间轮转：洛克日 → 晨光 → 夜枫 → 洛克日。
    */
   function toggleTheme() {
-    const next = themeName.value === 'themeA' ? 'themeB' : 'themeA'
+    const idx = THEME_ORDER.indexOf(themeName.value as (typeof THEME_ORDER)[number])
+    const next = THEME_ORDER[(idx + 1) % THEME_ORDER.length]
     setTheme(next)
   }
 

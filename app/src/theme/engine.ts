@@ -1,13 +1,15 @@
 import { TOKEN_TO_CSS_VAR, type ThemeManifest, type ThemeTokens } from './tokens'
 import themeA from './manifests/theme-a.json'
 import themeB from './manifests/theme-b.json'
+import themeC from './manifests/theme-c.json'
 
 const manifests: Record<string, ThemeManifest> = {
+  themeC: themeC as ThemeManifest,
   themeA: themeA as ThemeManifest,
   themeB: themeB as ThemeManifest,
 }
 
-let currentManifest: ThemeManifest = manifests.themeA
+let currentManifest: ThemeManifest = manifests.themeC
 
 /**
  * 把 Token 序列化成 CSS variable 声明片段，
@@ -28,7 +30,7 @@ export function buildCssVarStyle(tokens: ThemeTokens): string {
  *   并通过 setNavigationBarColor 同步顶部栏配色
  */
 export function applyTheme(name: string): ThemeManifest {
-  const manifest = manifests[name] ?? manifests.themeA
+  const manifest = manifests[name] ?? manifests.themeC
   currentManifest = manifest
 
   // #ifdef H5

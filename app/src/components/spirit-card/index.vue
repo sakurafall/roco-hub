@@ -1,5 +1,5 @@
 <template>
-  <view class="card" @tap="onTap">
+  <view class="card" :class="{ 'card--compact': compact }" @tap="onTap">
     <view class="card__cover">
       <image
         v-if="spirit.thumbnail"
@@ -37,9 +37,16 @@ interface Props {
    * spirit.typeIcons 缺失时用它补，避免老数据没有 element_detail 导致空白。
    */
   typeIconMap?: Record<string, string>
+  /**
+   * 紧凑模式：用于首页横滑等空间受限的容器，整体字号/间距更小、阴影更柔。
+   */
+  compact?: boolean
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  typeIconMap: () => ({}),
+  compact: false,
+})
 const emit = defineEmits<{
   (e: 'tap', spirit: SpiritSummary): void
 }>()
@@ -157,5 +164,34 @@ function onTap() {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.card--compact {
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4rpx 14rpx rgba(255, 180, 80, 0.18);
+  border: none;
+
+  .card__no {
+    font-size: 18rpx;
+    padding: 2rpx 8rpx;
+  }
+
+  .card__type {
+    width: 28rpx;
+    height: 28rpx;
+  }
+
+  .card__type-img {
+    width: 22rpx;
+    height: 22rpx;
+  }
+
+  .card__name-bar {
+    padding: 10rpx 6rpx 14rpx;
+  }
+
+  .card__name {
+    font-size: 24rpx;
+  }
 }
 </style>
