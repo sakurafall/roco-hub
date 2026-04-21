@@ -2,7 +2,9 @@
   <view class="home" :style="themeStyle">
     <!-- ============ 自定义 NavBar ============ -->
     <view class="navbar" :style="navbarStyle">
-      <view class="navbar__inner">
+      <!-- 状态栏占位（高度由 utils/navbar 统一计算） -->
+      <view class="navbar__status" :style="{ height: nav.statusBarHeight + 'px' }" />
+      <view class="navbar__inner" :style="{ height: nav.contentHeight + 'px' }">
         <view class="navbar__brand">
           <view class="navbar__logo">
             <text class="navbar__logo-glyph">洛</text>
@@ -12,7 +14,12 @@
             <text class="navbar__subtitle">Malt Games · {{ themeLabel }}</text>
           </view>
         </view>
-        <view class="navbar__theme" @tap="onSwitchTheme">
+        <!-- 主题切换按钮：小程序端 rightSafeArea 会让开胶囊，H5 为 0 原样右贴 -->
+        <view
+          class="navbar__theme"
+          :style="{ marginRight: nav.rightSafeArea + 'px' }"
+          @tap="onSwitchTheme"
+        >
           <text class="navbar__theme-icon">◐</text>
         </view>
       </view>
@@ -152,6 +159,7 @@ import { useAnalytics } from '@/composables/useAnalytics'
 import { useDataStore } from '@/stores/data'
 import { useHistoryStore } from '@/stores/history'
 import { buildCssVarStyle } from '@/theme/engine'
+import { getNavbarLayout } from '@/utils/navbar'
 import SpiritCard from '@/components/spirit-card/index.vue'
 import type { SpiritSummary } from '@/types/spirit'
 
@@ -167,6 +175,9 @@ const themeStyle = computed(() => buildCssVarStyle(currentManifest.value.tokens)
 const navbarStyle = computed(() => ({
   background: currentManifest.value.navBg,
 }))
+
+/** 自定义 NavBar 布局：状态栏高度 / 内容区高度 / 右侧胶囊避让，统一由 utils/navbar 计算（带缓存）。 */
+const nav = getNavbarLayout()
 
 const dataVersion = computed(() => dataStore.version)
 const bannerDesc = computed(() => {
@@ -283,16 +294,17 @@ function onFeedbackTap() {
 /* ============ NavBar ============ */
 .navbar {
   width: 100%;
-  /* 留出状态栏空间（H5 用 env(safe-area-inset-top)，小程序自动避让） */
-  padding-top: constant(safe-area-inset-top);
-  padding-top: env(safe-area-inset-top);
+}
+.navbar__status {
+  width: 100%;
+  /* height 由 JS 注入，保持与系统状态栏等高 */
 }
 .navbar__inner {
-  height: 88rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 32rpx;
+  /* height 由 JS 注入，与胶囊对齐 */
 }
 .navbar__brand {
   display: flex;
