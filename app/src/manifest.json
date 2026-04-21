@@ -1,0 +1,32 @@
+{
+    "name" : "洛克助手·Malt Games",
+    "appid" : "",
+    "description" : "洛克助手·Malt Games · 工具优先的精灵图鉴助手",
+    "versionName" : "0.0.1",
+    "versionCode" : "1",
+    "transformPx" : false,
+    "h5" : {
+        "title" : "洛克助手·Malt Games",
+        "router" : {
+            "mode" : "hash",
+            "base" : "./"
+        }
+    },
+    /* 微信小程序特有相关，appid 留空，开发者本地运行需替换为自己的测试号 */
+    "mp-weixin" : {
+        "appid" : "wx40da6b4aaa0f58b3",
+        "setting" : {
+            "urlCheck" : false,
+            "minified" : true,
+            "es6" : true
+        },
+        "usingComponents" : true,
+        "optimization" : {
+            "subPackages" : true
+        }
+    },
+    "uniStatistics" : {
+        "enable" : false
+    },
+    "vueVersion" : "3"
+}

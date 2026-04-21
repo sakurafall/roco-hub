@@ -1,0 +1,20 @@
+{
+  "name": "themeA",
+  "label": "晨光",
+  "navBg": "#FFFFFF",
+  "navTextStyle": "black",
+  "tokens": {
+    "colorBg": "#F6F8FB",
+    "colorBgElevated": "#FFFFFF",
+    "colorPrimary": "#2F6BFF",
+    "colorPrimarySoft": "#E5EEFF",
+    "colorAccent": "#FF8A3D",
+    "colorText": "#1B2236",
+    "colorTextSecondary": "#5C6479",
+    "colorBorder": "#E4E8F1",
+    "radiusSm": "8rpx",
+    "radiusMd": "16rpx",
+    "radiusLg": "24rpx",
+    "shadowCard": "0 4rpx 16rpx rgba(20, 30, 60, 0.06)"
+  }
+}

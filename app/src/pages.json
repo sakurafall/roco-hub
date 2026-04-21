@@ -1,0 +1,117 @@
+{
+  "pages": [
+    {
+      "path": "pages/home/index",
+      "style": {
+        "navigationBarTitleText": "洛克助手·Malt Games"
+      }
+    },
+    {
+      "path": "pages/discover/index",
+      "style": {
+        "navigationBarTitleText": "发现"
+      }
+    },
+    {
+      "path": "pages/me/index",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "pages-spirit",
+      "pages": [
+        {
+          "path": "list/index",
+          "style": { "navigationBarTitleText": "图鉴" }
+        },
+        {
+          "path": "detail/index",
+          "style": { "navigationBarTitleText": "精灵详情" }
+        }
+      ]
+    },
+    {
+      "root": "pages-tools",
+      "pages": [
+        {
+          "path": "index/index",
+          "style": { "navigationBarTitleText": "工具箱" }
+        },
+        {
+          "path": "type-matchup/index",
+          "style": { "navigationBarTitleText": "属性克制" }
+        },
+        {
+          "path": "hatch-predict/index",
+          "style": { "navigationBarTitleText": "孵蛋反查" }
+        }
+      ]
+    },
+    {
+      "root": "pages-me",
+      "pages": [
+        {
+          "path": "favorites/index",
+          "style": { "navigationBarTitleText": "我的收藏" }
+        },
+        {
+          "path": "history/index",
+          "style": { "navigationBarTitleText": "浏览历史" }
+        },
+        {
+          "path": "appearance/index",
+          "style": { "navigationBarTitleText": "外观设置" }
+        },
+        {
+          "path": "feedback/index",
+          "style": { "navigationBarTitleText": "意见反馈" }
+        },
+        {
+          "path": "about/index",
+          "style": { "navigationBarTitleText": "关于" }
+        }
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/home/index": {
+      "network": "all",
+      "packages": ["pages-spirit"]
+    }
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "洛克助手·Malt Games",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F6F8FB"
+  },
+  "tabBar": {
+    "color": "#5C6479",
+    "selectedColor": "#2F6BFF",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/discover/index",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/me/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^u-(.*)": "uview-plus/components/u-$1/u-$1.vue"
+    }
+  }
+}

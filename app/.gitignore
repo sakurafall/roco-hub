@@ -1,0 +1,32 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency
+node_modules
+
+# Build output
+dist
+unpackage
+
+# OS / Editor
+.DS_Store
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.local
+
+# Local env files (only commit example)
+.env.*.local
+
+# Coverage
+coverage
+.vscode/.cache

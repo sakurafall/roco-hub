@@ -1,0 +1,11 @@
+[
+  { "attacker": "fire", "defender": "grass", "multiplier": 2 },
+  { "attacker": "fire", "defender": "water", "multiplier": 0.5 },
+  { "attacker": "fire", "defender": "fire", "multiplier": 1 },
+  { "attacker": "water", "defender": "fire", "multiplier": 2 },
+  { "attacker": "water", "defender": "grass", "multiplier": 0.5 },
+  { "attacker": "water", "defender": "water", "multiplier": 1 },
+  { "attacker": "grass", "defender": "water", "multiplier": 2 },
+  { "attacker": "grass", "defender": "fire", "multiplier": 0.5 },
+  { "attacker": "grass", "defender": "grass", "multiplier": 1 }
+]

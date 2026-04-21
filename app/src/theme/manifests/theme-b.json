@@ -1,0 +1,20 @@
+{
+  "name": "themeB",
+  "label": "夜枫",
+  "navBg": "#1A1B22",
+  "navTextStyle": "white",
+  "tokens": {
+    "colorBg": "#14161E",
+    "colorBgElevated": "#1F2230",
+    "colorPrimary": "#F26B5E",
+    "colorPrimarySoft": "#3A2A2A",
+    "colorAccent": "#F2C94C",
+    "colorText": "#F1F2F6",
+    "colorTextSecondary": "#9AA0B4",
+    "colorBorder": "#2C2F3D",
+    "radiusSm": "8rpx",
+    "radiusMd": "16rpx",
+    "radiusLg": "24rpx",
+    "shadowCard": "0 4rpx 16rpx rgba(0, 0, 0, 0.32)"
+  }
+}

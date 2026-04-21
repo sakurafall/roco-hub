@@ -1,0 +1,226 @@
+{
+  "code": 0,
+  "data": {
+    "sections": [
+      {
+        "section_key": "sec_6b980081d4",
+        "section_title": "精灵类型",
+        "options": [
+          {
+            "id": 2,
+            "group": "1",
+            "label": "Ⅰ阶",
+            "data_option": "1|Ⅰ阶",
+            "data_reverse": "false",
+            "icon_url": ""
+          },
+          {
+            "id": 3,
+            "group": "1",
+            "label": "Ⅱ阶",
+            "data_option": "1|Ⅱ阶",
+            "data_reverse": "false",
+            "icon_url": ""
+          },
+          {
+            "id": 4,
+            "group": "1",
+            "label": "最终形态",
+            "data_option": "1|最终形态",
+            "data_reverse": "false",
+            "icon_url": ""
+          },
+          {
+            "id": 5,
+            "group": "4",
+            "label": "地区形态",
+            "data_option": "4|地区形态",
+            "data_reverse": "true",
+            "icon_url": ""
+          },
+          {
+            "id": 6,
+            "group": "5",
+            "label": "首领形态",
+            "data_option": "5|首领形态",
+            "data_reverse": "false",
+            "icon_url": ""
+          }
+        ]
+      },
+      {
+        "section_key": "sec_7cb913a424",
+        "section_title": "精灵异色",
+        "options": [
+          {
+            "id": 7,
+            "group": "6",
+            "label": "有异色",
+            "data_option": "6|是",
+            "data_reverse": "false",
+            "icon_url": ""
+          },
+          {
+            "id": 8,
+            "group": "6",
+            "label": "没异色",
+            "data_option": "6|否",
+            "data_reverse": "false",
+            "icon_url": ""
+          }
+        ]
+      },
+      {
+        "section_key": "sec_22ffb56c19",
+        "section_title": "精灵属性",
+        "options": [
+          {
+            "id": 9,
+            "group": "2",
+            "label": "普通",
+            "data_option": "2|普通",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/c7/c7ccdd35a46e4badbed9d9999a00c1c1636e2978.png"
+          },
+          {
+            "id": 10,
+            "group": "2",
+            "label": "草",
+            "data_option": "2|草",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/60/60263e4f81cac51a94dd7326ea62f414747d7cd9.png"
+          },
+          {
+            "id": 11,
+            "group": "2",
+            "label": "火",
+            "data_option": "2|火",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/4c/4c4ea7497e3d18e082caacb1349fa64cd471c601.png"
+          },
+          {
+            "id": 12,
+            "group": "2",
+            "label": "水",
+            "data_option": "2|水",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/6d/6d90bda4432cdf1045e69511a1fec401bf58a46d.png"
+          },
+          {
+            "id": 13,
+            "group": "2",
+            "label": "光",
+            "data_option": "2|光",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/dd/ddf872f0cb8a0c900803a21e9da3d76c81442737.png"
+          },
+          {
+            "id": 14,
+            "group": "2",
+            "label": "地",
+            "data_option": "2|地",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/07/07a5bce19155b87654c6ca3d6468d48fb4c3c54a.png"
+          },
+          {
+            "id": 15,
+            "group": "2",
+            "label": "冰",
+            "data_option": "2|冰",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/d5/d57725156ea1a74e743d8915c307f7b1b2de1aa8.png"
+          },
+          {
+            "id": 16,
+            "group": "2",
+            "label": "龙",
+            "data_option": "2|龙",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/af/af1a81b4dc3250705a0036add9279a930ea4b9ee.png"
+          },
+          {
+            "id": 17,
+            "group": "2",
+            "label": "电",
+            "data_option": "2|电",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/a0/a0833a6ed13c46610a249ccce9674cea33b5160f.png"
+          },
+          {
+            "id": 18,
+            "group": "2",
+            "label": "毒",
+            "data_option": "2|毒",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/a8/a83631e566f450e2412d40c34ae7a36f25908817.png"
+          },
+          {
+            "id": 19,
+            "group": "2",
+            "label": "虫",
+            "data_option": "2|虫",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/df/df71b8cced023bea19ee94de6246c3c39cb2694b.png"
+          },
+          {
+            "id": 20,
+            "group": "2",
+            "label": "武",
+            "data_option": "2|武",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/e0/e0d60cfe9b02ec93501205b4afc6ab1fc99095ad.png"
+          },
+          {
+            "id": 21,
+            "group": "2",
+            "label": "翼",
+            "data_option": "2|翼",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/d7/d7e63141701aff362ab9d1fb0644e2a56be4560f.png"
+          },
+          {
+            "id": 22,
+            "group": "2",
+            "label": "萌",
+            "data_option": "2|萌",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/44/449d86d111d9e76531f3a08c9aa0f77af3e9e64b.png"
+          },
+          {
+            "id": 23,
+            "group": "2",
+            "label": "幽",
+            "data_option": "2|幽",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/ff/ff559b8b0e6bfca39d42998834dbc1c61ab23064.png"
+          },
+          {
+            "id": 24,
+            "group": "2",
+            "label": "恶",
+            "data_option": "2|恶",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/98/980b75067de94929092a9c38b8169d510d5f0110.png"
+          },
+          {
+            "id": 25,
+            "group": "2",
+            "label": "机械",
+            "data_option": "2|机械",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/88/88133983693d7eab992da89fa8fc18dccca4a6cf.png"
+          },
+          {
+            "id": 26,
+            "group": "2",
+            "label": "幻",
+            "data_option": "2|幻",
+            "data_reverse": "false",
+            "icon_url": "https://oss.xinhan.site/lkwg/46/46c68c3ea1ecb43d7d33ec5743bd10de81d77fc2.png"
+          }
+        ]
+      }
+    ]
+  },
+  "msg": "ok"
+}

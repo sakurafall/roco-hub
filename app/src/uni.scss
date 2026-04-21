@@ -1,0 +1,23 @@
+/**
+ * 全局 SCSS 变量与工具类
+ * 颜色统一通过 CSS 变量（var(--color-xxx)）注入，方便主题切换。
+ * 这里仅放与"主题无关"的常量与 mixin。
+ */
+
+/* ---------- 间距 ---------- */
+$loka-spacing-xs: 8rpx;
+$loka-spacing-sm: 16rpx;
+$loka-spacing-md: 24rpx;
+$loka-spacing-lg: 32rpx;
+$loka-spacing-xl: 48rpx;
+
+/* ---------- 字号 ---------- */
+$loka-font-size-xs: 22rpx;
+$loka-font-size-sm: 26rpx;
+$loka-font-size-md: 28rpx;
+$loka-font-size-lg: 32rpx;
+$loka-font-size-xl: 40rpx;
+$loka-font-size-display: 56rpx;
+
+/* ---------- 兼容 uview-plus 的入口（按需）---------- */
+/* @import 'uview-plus/theme.scss'; */
