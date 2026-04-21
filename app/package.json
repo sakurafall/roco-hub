@@ -13,6 +13,7 @@
     "lint:fix": "pnpm lint --fix",
     "format": "prettier --write \"src/**/*.{ts,vue,scss,json}\"",
     "test": "vitest run",
+    "gen:tabbar": "node scripts/generate-tabbar-icons.mjs",
     "prepare": "husky || true"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "@dcloudio/uni-cli-shared": "3.0.0-4080420251103001",
     "@dcloudio/uni-stacktracey": "3.0.0-4080420251103001",
     "@dcloudio/vite-plugin-uni": "3.0.0-4080420251103001",
+    "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^20.16.10",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",

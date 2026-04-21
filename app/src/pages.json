@@ -8,6 +8,18 @@
       }
     },
     {
+      "path": "pages/pokedex/index",
+      "style": {
+        "navigationBarTitleText": "图鉴"
+      }
+    },
+    {
+      "path": "pages/tools/index",
+      "style": {
+        "navigationBarTitleText": "工具箱"
+      }
+    },
+    {
       "path": "pages/discover/index",
       "style": {
         "navigationBarTitleText": "发现"
@@ -25,10 +37,6 @@
       "root": "pages-spirit",
       "pages": [
         {
-          "path": "list/index",
-          "style": { "navigationBarTitleText": "图鉴" }
-        },
-        {
           "path": "detail/index",
           "style": { "navigationBarTitleText": "精灵详情" }
         }
@@ -37,10 +45,6 @@
     {
       "root": "pages-tools",
       "pages": [
-        {
-          "path": "index/index",
-          "style": { "navigationBarTitleText": "工具箱" }
-        },
         {
           "path": "type-matchup/index",
           "style": { "navigationBarTitleText": "属性克制" }
@@ -90,22 +94,40 @@
     "backgroundColor": "#FFF8E1"
   },
   "tabBar": {
-    "color": "#6E6A5C",
+    "color": "#8A8578",
     "selectedColor": "#FFA62B",
     "backgroundColor": "#FFFCF3",
     "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/home/index",
-        "text": "首页"
+        "text": "首页",
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/pokedex/index",
+        "text": "图鉴",
+        "iconPath": "static/tabbar/pokedex.png",
+        "selectedIconPath": "static/tabbar/pokedex-active.png"
+      },
+      {
+        "pagePath": "pages/tools/index",
+        "text": "工具",
+        "iconPath": "static/tabbar/tools.png",
+        "selectedIconPath": "static/tabbar/tools-active.png"
       },
       {
         "pagePath": "pages/discover/index",
-        "text": "发现"
+        "text": "发现",
+        "iconPath": "static/tabbar/discover.png",
+        "selectedIconPath": "static/tabbar/discover-active.png"
       },
       {
         "pagePath": "pages/me/index",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "static/tabbar/me.png",
+        "selectedIconPath": "static/tabbar/me-active.png"
       }
     ]
   },

@@ -31,7 +31,7 @@ export type AnalyticsEventName =
   | 'favorite_toggle'
   | 'share_card_generate'
   | 'hatch_predict_submit'
-  | 'theme_switch'
+  | 'theme_change'
   | 'tool_open'
   | (string & {})
 

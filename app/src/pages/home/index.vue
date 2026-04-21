@@ -1,26 +1,22 @@
 <template>
   <view class="home" :style="themeStyle">
     <!-- ============ 自定义 NavBar ============ -->
+    <!-- PRD §8.7：主题切换只出现在「我的」，首页不放切换入口，保持视觉聚焦 -->
     <view class="navbar" :style="navbarStyle">
       <!-- 状态栏占位（高度由 utils/navbar 统一计算） -->
       <view class="navbar__status" :style="{ height: nav.statusBarHeight + 'px' }" />
-      <view class="navbar__inner" :style="{ height: nav.contentHeight + 'px' }">
+      <view
+        class="navbar__inner"
+        :style="{ height: nav.contentHeight + 'px', paddingRight: nav.rightSafeArea + 16 + 'px' }"
+      >
         <view class="navbar__brand">
           <view class="navbar__logo">
             <text class="navbar__logo-glyph">洛</text>
           </view>
           <view class="navbar__title-block">
             <text class="navbar__title">洛克助手</text>
-            <text class="navbar__subtitle">Malt Games · {{ themeLabel }}</text>
+            <text class="navbar__subtitle">Malt Games · 精灵图鉴</text>
           </view>
-        </view>
-        <!-- 主题切换按钮：小程序端 rightSafeArea 会让开胶囊，H5 为 0 原样右贴 -->
-        <view
-          class="navbar__theme"
-          :style="{ marginRight: nav.rightSafeArea + 'px' }"
-          @tap="onSwitchTheme"
-        >
-          <text class="navbar__theme-icon">◐</text>
         </view>
       </view>
     </view>
@@ -29,23 +25,30 @@
     <view class="hero">
       <view class="hero__decor hero__decor--ring" />
       <view class="hero__decor hero__decor--dots" />
+      <!-- 焦点精灵：取已加载精灵做半透明装饰，强化"图鉴"语义 -->
+      <image
+        v-if="heroSpirit"
+        class="hero__focus"
+        :src="heroSpirit.thumbnail"
+        mode="aspectFit"
+      />
       <view class="hero__inner">
         <text class="hero__hello">你好，训练师</text>
         <text class="hero__tagline">今天想查哪只精灵？</text>
+        <!-- 语音入口等真正支持时再补（mic.svg 已放 static/icons/ 预留）-->
         <view class="hero__search" @tap="onSearchTap">
-          <text class="hero__search-icon">🔍</text>
+          <image class="hero__search-icon" src="/static/icons/pokeball-color.svg" mode="aspectFit" />
           <text class="hero__search-placeholder">输入精灵名 / 编号 / 拼音</text>
-          <view class="hero__search-mic">🎙</view>
         </view>
       </view>
     </view>
 
-    <!-- ============ 数据版本 Banner ============ -->
+    <!-- ============ 数据 Banner：以"已收录数量"为叙事主体 ============ -->
     <view class="banner" @tap="onBannerTap">
-      <view class="banner__icon">📦</view>
+      <view class="banner__icon">✨</view>
       <view class="banner__body">
-        <text class="banner__title">当前数据版本 {{ dataVersion }}</text>
-        <text class="banner__desc">{{ bannerDesc }}</text>
+        <text class="banner__title">{{ bannerTitle }}</text>
+        <text class="banner__desc">版本 {{ dataVersion }} · 点击查看更新日志</text>
       </view>
       <text class="banner__arrow">›</text>
     </view>
@@ -59,7 +62,7 @@
         @tap="onQuickToolTap(tool)"
       >
         <view class="quick__icon-wrap" :style="{ background: tool.bg }">
-          <text class="quick__icon">{{ tool.icon }}</text>
+          <image class="quick__icon" :src="tool.iconImg" mode="aspectFit" />
         </view>
         <text class="quick__label">{{ tool.label }}</text>
       </view>
@@ -134,7 +137,9 @@
 
     <!-- ============ 反馈与数据纠错 ============ -->
     <view class="feedback" @tap="onFeedbackTap">
-      <view class="feedback__icon">💬</view>
+      <view class="feedback__icon">
+        <image class="feedback__icon-img" src="/static/icons/feedback.svg" mode="aspectFit" />
+      </view>
       <view class="feedback__body">
         <text class="feedback__title">数据有误？想要新功能？</text>
         <text class="feedback__desc">告诉我们，每条建议都会被人看到</text>
@@ -163,14 +168,13 @@ import { getNavbarLayout } from '@/utils/navbar'
 import SpiritCard from '@/components/spirit-card/index.vue'
 import type { SpiritSummary } from '@/types/spirit'
 
-const { currentManifest, toggle } = useTheme()
+const { currentManifest } = useTheme()
 const { spirits, total, loading, load } = useSpirits()
 const filters = useSpiritFilters()
 const dataStore = useDataStore()
 const historyStore = useHistoryStore()
 const analytics = useAnalytics()
 
-const themeLabel = computed(() => currentManifest.value.label)
 const themeStyle = computed(() => buildCssVarStyle(currentManifest.value.tokens))
 const navbarStyle = computed(() => ({
   background: currentManifest.value.navBg,
@@ -180,13 +184,20 @@ const navbarStyle = computed(() => ({
 const nav = getNavbarLayout()
 
 const dataVersion = computed(() => dataStore.version)
-const bannerDesc = computed(() => {
-  if (loading.value && total.value === 0) return '正在加载精灵数据…'
-  return `已收录 ${total.value} 只精灵 · 点击查看更新日志`
+const bannerTitle = computed(() => {
+  if (loading.value && total.value === 0) return '正在同步精灵数据…'
+  return `已收录 ${total.value} 只精灵`
 })
 
 // 热门精灵：MVP-A 暂取前 8 只占位（PRD §2.7 说明后端"最近 7 日 TOP"接口未就绪）
 const hotSpirits = computed<SpiritSummary[]>(() => spirits.value.slice(0, 8))
+
+// Hero 焦点精灵：挑一只做半透明剪影（取第 15 只，避开 001 蛋/种子类视觉不够醒目的前排）
+const heroSpirit = computed<SpiritSummary | null>(() => {
+  const list = spirits.value
+  if (!list.length) return null
+  return list[Math.min(14, list.length - 1)] ?? null
+})
 
 // 最近查看：从 historyStore 取前 6 条，并和 spirits 关联出完整卡数据
 const recentSpirits = computed<SpiritSummary[]>(() => {
@@ -207,19 +218,22 @@ const elementIconMap = computed<Record<string, string>>(() => {
   return map
 })
 
-interface QuickTool {
+// navigateKind 区分跳转方式：'switchTab' 给 tabBar 页面（图鉴/工具），'navigateTo' 给分包页面
+type NavigateKind = 'switchTab' | 'navigateTo'
+interface QuickToolWithNav {
   key: 'pokedex' | 'matchup' | 'hatch' | 'fav'
   label: string
-  icon: string
+  iconImg: string
   bg: string
   url: string
+  navigateKind: NavigateKind
 }
 
-const quickTools: QuickTool[] = [
-  { key: 'pokedex', label: '图鉴', icon: '📖', bg: 'linear-gradient(135deg, #FFE08A 0%, #FFC93C 100%)', url: '/pages-spirit/list/index' },
-  { key: 'matchup', label: '克制', icon: '⚔', bg: 'linear-gradient(135deg, #FFB199 0%, #FF7A5A 100%)', url: '/pages-tools/type-matchup/index' },
-  { key: 'hatch', label: '孵蛋', icon: '🥚', bg: 'linear-gradient(135deg, #B5E4FF 0%, #7EC8FF 100%)', url: '/pages-tools/hatch-predict/index' },
-  { key: 'fav', label: '收藏', icon: '❤', bg: 'linear-gradient(135deg, #FFB7C5 0%, #FF7A9C 100%)', url: '/pages-me/favorites/index' },
+const quickTools: QuickToolWithNav[] = [
+  { key: 'pokedex', label: '图鉴', iconImg: '/static/icons/pokedex.svg', bg: 'linear-gradient(135deg, #FFE08A 0%, #FFC93C 100%)', url: '/pages/pokedex/index', navigateKind: 'switchTab' },
+  { key: 'matchup', label: '克制', iconImg: '/static/icons/sword.svg', bg: 'linear-gradient(135deg, #FFB199 0%, #FF7A5A 100%)', url: '/pages-tools/type-matchup/index', navigateKind: 'navigateTo' },
+  { key: 'hatch', label: '孵蛋', iconImg: '/static/icons/egg.svg', bg: 'linear-gradient(135deg, #B5E4FF 0%, #7EC8FF 100%)', url: '/pages-tools/hatch-predict/index', navigateKind: 'navigateTo' },
+  { key: 'fav', label: '收藏', iconImg: '/static/icons/heart.svg', bg: 'linear-gradient(135deg, #FFB7C5 0%, #FF7A9C 100%)', url: '/pages-me/favorites/index', navigateKind: 'navigateTo' },
 ]
 
 onMounted(() => {
@@ -235,15 +249,10 @@ onShow(() => {
   analytics.track('page_view', { page: 'home' })
 })
 
-function onSwitchTheme() {
-  toggle()
-  analytics.track('theme_switch', { to: currentManifest.value.name })
-  uni.showToast({ title: `已切换到 ${currentManifest.value.label}`, icon: 'none', duration: 1200 })
-}
-
 function onSearchTap() {
   analytics.track('home_search_focus')
-  uni.navigateTo({ url: '/pages-spirit/list/index?focus=1' })
+  // switchTab 不支持 query 参数，故牺牲 ?focus=1 的自动聚焦，进入图鉴 Tab 后由用户手动点搜索框
+  uni.switchTab({ url: '/pages/pokedex/index' })
 }
 
 function onBannerTap() {
@@ -251,13 +260,17 @@ function onBannerTap() {
   uni.navigateTo({ url: '/pages-me/about/index' })
 }
 
-function onQuickToolTap(tool: QuickTool) {
+function onQuickToolTap(tool: QuickToolWithNav) {
   analytics.track('home_quick_tool_click', { tool: tool.key })
-  uni.navigateTo({ url: tool.url })
+  if (tool.navigateKind === 'switchTab') {
+    uni.switchTab({ url: tool.url })
+  } else {
+    uni.navigateTo({ url: tool.url })
+  }
 }
 
 function onJumpList() {
-  uni.navigateTo({ url: '/pages-spirit/list/index' })
+  uni.switchTab({ url: '/pages/pokedex/index' })
 }
 
 function onJumpHistory() {
@@ -343,23 +356,6 @@ function onFeedbackTap() {
   line-height: 1.2;
   margin-top: 2rpx;
 }
-.navbar__theme {
-  width: 64rpx;
-  height: 64rpx;
-  border-radius: 50%;
-  background: var(--color-bg-elevated);
-  border: 1rpx solid var(--color-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-card);
-}
-.navbar__theme-icon {
-  font-size: 32rpx;
-  color: var(--color-primary);
-  font-weight: 700;
-  line-height: 1;
-}
 
 /* ============ Hero ============ */
 .hero {
@@ -398,6 +394,18 @@ function onFeedbackTap() {
     100rpx 24rpx 0 #FFC93C,
     -32rpx -16rpx 0 #FFB7C5;
 }
+/* 焦点精灵：右下半透明剪影，做"图鉴世界观"装饰，不抢搜索焦点 */
+.hero__focus {
+  position: absolute;
+  right: -24rpx;
+  bottom: -16rpx;
+  width: 260rpx;
+  height: 260rpx;
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(-6deg);
+}
 .hero__inner {
   position: relative;
   z-index: 1;
@@ -430,24 +438,14 @@ function onFeedbackTap() {
   border: 2rpx solid rgba(255, 201, 60, 0.4);
 }
 .hero__search-icon {
-  font-size: 32rpx;
+  width: 48rpx;
+  height: 48rpx;
+  flex-shrink: 0;
 }
 .hero__search-placeholder {
   flex: 1;
   font-size: 28rpx;
   color: var(--color-text-secondary);
-}
-.hero__search-mic {
-  width: 56rpx;
-  height: 56rpx;
-  border-radius: 50%;
-  background: var(--color-primary-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26rpx;
-  color: var(--color-primary);
-  opacity: 0.55; /* PRD §2.4：语音 P2 再上，灰置 */
 }
 
 /* ============ 版本 Banner ============ */
@@ -531,9 +529,8 @@ function onFeedbackTap() {
   box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
 }
 .quick__icon {
-  font-size: 44rpx;
-  color: #FFFFFF;
-  line-height: 1;
+  width: 56rpx;
+  height: 56rpx;
 }
 .quick__label {
   font-size: 26rpx;
@@ -625,8 +622,11 @@ function onFeedbackTap() {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32rpx;
   flex-shrink: 0;
+}
+.feedback__icon-img {
+  width: 40rpx;
+  height: 40rpx;
 }
 .feedback__body {
   flex: 1;
