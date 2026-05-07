@@ -138,19 +138,36 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import { onShow } from '@dcloudio/uni-app'
+import { onShareAppMessage, onShareTimeline, onShow } from '@dcloudio/uni-app'
 import { useTheme } from '@/composables/useTheme'
+import { useShare } from '@/composables/useShare'
 import { buildCssVarStyle } from '@/theme/engine'
 import { useSpiritList } from '@/composables/useSpiritList'
 import { useAnalytics } from '@/composables/useAnalytics'
 import { debounce } from '@/utils/debounce'
-import SpiritCard from '@/components/spirit-card/index.vue'
-import FilterSheet from '@/components/filter-sheet/index.vue'
 import type { FilterGroupKey } from '@/types/spirit-filter'
 import type { SpiritSummary } from '@/types/spirit'
+import SpiritCard from '@/components/spirit-card/index.vue'
+import FilterSheet from '@/components/filter-sheet/index.vue'
 
 const { currentManifest } = useTheme()
 const themeStyle = computed(() => buildCssVarStyle(currentManifest.value.tokens))
+const share = useShare()
+
+onShareAppMessage(() => {
+  return share.getShareAppMessage()
+})
+
+onShareTimeline(() => {
+  return share.getShareTimeline()
+})  
+
+onShow(() => {
+  uni.showShareMenu({
+    withShareTicket: true,
+    menus: ['shareAppMessage', 'shareTimeline']
+  })
+})
 
 const {
   total,

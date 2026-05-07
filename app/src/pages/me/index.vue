@@ -26,8 +26,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useTheme } from '@/composables/useTheme'
+import { onShareAppMessage, onShareTimeline, onShow } from '@dcloudio/uni-app'
 import { useUserStore } from '@/stores/user'
+import { useTheme } from '@/composables/useTheme'
+import { useShare } from '@/composables/useShare'
 import { buildCssVarStyle } from '@/theme/engine'
 
 const { currentManifest } = useTheme()
@@ -35,9 +37,26 @@ const themeStyle = computed(() => buildCssVarStyle(currentManifest.value.tokens)
 const userStore = useUserStore()
 const profile = computed(() => userStore.profile)
 
+const share = useShare()
+
+onShareAppMessage(() => {
+  return share.getShareAppMessage()
+})
+
+onShareTimeline(() => {
+  return share.getShareTimeline()
+})
+
 function go(url: string) {
   uni.navigateTo({ url })
 }
+
+onShow(() => {
+  uni.showShareMenu({
+    withShareTicket: true,
+    menus: ['shareAppMessage', 'shareTimeline']
+  })
+})
 </script>
 
 <style lang="scss" scoped>

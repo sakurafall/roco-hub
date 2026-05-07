@@ -70,13 +70,31 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { onShareAppMessage, onShareTimeline, onShow } from '@dcloudio/uni-app'
 import { useTheme } from '@/composables/useTheme'
 import { useAnalytics } from '@/composables/useAnalytics'
 import { buildCssVarStyle } from '@/theme/engine'
+import { useShare } from '@/composables/useShare'
 
 const { currentManifest } = useTheme()
 const themeStyle = computed(() => buildCssVarStyle(currentManifest.value.tokens))
 const analytics = useAnalytics()
+const share = useShare()
+
+onShareAppMessage(() => {
+  return share.getShareAppMessage()
+})
+
+onShareTimeline(() => {
+  return share.getShareTimeline()
+})
+
+onShow(() => {
+  uni.showShareMenu({
+    withShareTicket: true,
+    menus: ['shareAppMessage', 'shareTimeline']
+  })
+})
 
 interface Tool {
   key: string

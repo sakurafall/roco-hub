@@ -4,31 +4,41 @@
       "path": "pages/home/index",
       "style": {
         "navigationStyle": "custom",
-        "navigationBarTitleText": "洛克助手·Malt Games"
+        "navigationBarTitleText": "洛克助手·Malt Games",
+        "enableShareAppMessage": true,
+        "enableShareTimeline": true
       }
     },
     {
       "path": "pages/pokedex/index",
       "style": {
-        "navigationBarTitleText": "图鉴"
+        "navigationBarTitleText": "图鉴",
+        "enableShareAppMessage": true,
+        "enableShareTimeline": true
       }
     },
     {
       "path": "pages/tools/index",
       "style": {
-        "navigationBarTitleText": "工具箱"
+        "navigationBarTitleText": "工具箱",
+        "enableShareAppMessage": true,
+        "enableShareTimeline": true
       }
     },
     {
       "path": "pages/discover/index",
       "style": {
-        "navigationBarTitleText": "发现"
+        "navigationBarTitleText": "发现",
+        "enableShareAppMessage": true,
+        "enableShareTimeline": true
       }
     },
     {
       "path": "pages/me/index",
       "style": {
-        "navigationBarTitleText": "我的"
+        "navigationBarTitleText": "我的",
+        "enableShareAppMessage": true,
+        "enableShareTimeline": true
       }
     }
   ],

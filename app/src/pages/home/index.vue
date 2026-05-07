@@ -156,7 +156,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
-import { onShow } from '@dcloudio/uni-app'
+import { onShareAppMessage, onShareTimeline, onShow } from '@dcloudio/uni-app'
 import { useTheme } from '@/composables/useTheme'
 import { useSpirits } from '@/composables/useSpirits'
 import { useSpiritFilters } from '@/composables/useSpiritFilters'
@@ -165,6 +165,7 @@ import { useDataStore } from '@/stores/data'
 import { useHistoryStore } from '@/stores/history'
 import { buildCssVarStyle } from '@/theme/engine'
 import { getNavbarLayout } from '@/utils/navbar'
+import { useShare } from '@/composables/useShare'
 import SpiritCard from '@/components/spirit-card/index.vue'
 import type { SpiritSummary } from '@/types/spirit'
 
@@ -174,6 +175,15 @@ const filters = useSpiritFilters()
 const dataStore = useDataStore()
 const historyStore = useHistoryStore()
 const analytics = useAnalytics()
+const share = useShare()
+
+onShareAppMessage(() => {
+  return share.getShareAppMessage()
+})
+
+onShareTimeline(() => {
+  return share.getShareTimeline()
+})
 
 const themeStyle = computed(() => buildCssVarStyle(currentManifest.value.tokens))
 const navbarStyle = computed(() => ({
@@ -246,6 +256,10 @@ onMounted(() => {
 })
 
 onShow(() => {
+  uni.showShareMenu({
+    withShareTicket: true,
+    menus: ['shareAppMessage', 'shareTimeline']
+  })
   analytics.track('page_view', { page: 'home' })
 })
 
